@@ -1,12 +1,12 @@
 #include <iostream>
-
+#include "queue.h"
 using namespace std;
-class node{
+class treenode{
     public:
-        node *left;
-        node *right;
+        treenode *left;
+        treenode *right;
         int num;
-        node(int num){
+        treenode(int num){
             this->num=num;
         }
 
@@ -16,15 +16,15 @@ class node{
 
 class tree{
     public:
-        node *root;
+        treenode *root;
         tree(){
 
             root=nullptr;
 
         }
 
-        node* pushednode(node *root, int num){
-            node *newnode=new node(num); 
+        treenode* pushednode(treenode *root, int num){
+            treenode *newnode=new treenode(num); 
             if(root==nullptr){
                 return newnode;
             }
@@ -43,7 +43,7 @@ class tree{
 
 
         }
-        void preorderset(node *root){
+        void preorderset(treenode *root){
             cout<<root->num<<endl;
             preorderset(root->left);
             preorderset(root->right);
@@ -57,7 +57,7 @@ class tree{
 
 
         }
-         void inorderset(node *root){
+         void inorderset(treenode *root){
            
             inorderset(root->left);
             cout<<root->num<<endl;
@@ -72,7 +72,7 @@ class tree{
 
 
         }
-         void postorderset(node *root){
+         void postorderset(treenode *root){
             
             postorderset(root->left);
             postorderset(root->right);
@@ -89,7 +89,28 @@ class tree{
         }
 
         void levelset(){
-
+            queue *qu=new queue();
+            treenode* current=root;
+            qu->enqueue(current);
+            while(!qu->isempty()){
+                treenode deletenode=(qu->dequeue());
+                cout<<deletenode.num<<endl;
+                if(deletenode.left!=nullptr){
+                    qu->enqueue(deletenode.left);
+                }
+           
+               if(deletenode.right!=nullptr){
+                    qu->enqueue(deletenode.left);
+                }
+           
+           
+           
+           
+           
+            }
+           
+           
+            
 
 
 

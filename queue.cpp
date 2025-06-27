@@ -1,13 +1,14 @@
 #include <iostream>
+#include "queue.h"
 using namespace std;
 class node{
     public:
         node *prev;
         node *next;
-        int num;
-        node(int num){
+        treenode *nodes;
+        node(treenode *trnode){
             prev=next=nullptr;
-            this->num=num;
+            nodes=trnode;
         }
 };
 
@@ -22,8 +23,8 @@ class queue{
         return head==nullptr&&tail==nullptr;
 
     }  
-    void enqueue(int num){
-        node *newnode= new node(num);
+    void enqueue(treenode *trnode){
+        node *newnode= new node(trnode);
         if(isempty()){
             head=tail=newnode;
         }
@@ -41,29 +42,14 @@ class queue{
 
 
     }
-    int dequeue(){
-        int num=head->num;
+    treenode dequeue(){
+        treenode treenodes=*(head->nodes);
         head=head->next;
         delete head->prev;
 
-        return
-        
-        
-        num;
+        return treenodes;
     }
-    void print(){
-        node *current=head;
-        while(current!=nullptr){
-            cout<<current->num<<endl;
-            current=current->next;
-            
-
-
-        }
-
-
-
-    }
+    
 
 };
 
@@ -73,10 +59,6 @@ class queue{
 int main(){
 
 queue *qu=new queue();
-qu->enqueue(5);
-qu->enqueue(7);
-qu->enqueue(8);
-qu->print();
 
 
 
