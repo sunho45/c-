@@ -43,16 +43,64 @@ class tree{
 
 
         }
-        void preorderset(){}
-        
+        void preorderset(node *root){
+            cout<<root->num<<endl;
+            preorderset(root->left);
+            preorderset(root->right);
+        }   
+
         void preorder(){
-            preorderset();
+            preorderset(root);
 
 
 
 
 
         }
+         void inorderset(node *root){
+           
+            inorderset(root->left);
+            cout<<root->num<<endl;
+            inorderset(root->right);
+        }   
+
+        void inorder(){
+            inorderset(root);
+
+
+
+
+
+        }
+         void postorderset(node *root){
+            
+            postorderset(root->left);
+            postorderset(root->right);
+            cout<<root->num<<endl;
+        }   
+
+        void postorder(){
+            postorderset(root);
+
+
+
+
+
+        }
+
+        void levelset(){
+
+
+
+
+
+
+
+
+
+            
+        }
+
 
 
 
