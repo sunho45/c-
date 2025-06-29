@@ -106,11 +106,91 @@ class manageprogram{
             a=temp;
             
 
+            
+        }
+
+        void merge(student *arr,int start,int end){
+            int mid=start+(end-start)/2;
+
+            int n1=mid-start+1;
+            int n2=end-mid;
+            student *l=new student[n1];
+            student *r=new student[n2];
+            for(int i=0;i<n1;i++){
+                l[i]=arr[start+i];
+
+
+
+            }
+             for(int i=0;i<n2;i++){
+                r[i]=arr[mid+1+i];
+
+
+
+            }
+            int i=0, j=0, begin=start;
+
+
+            while(i<n1&&j<n2){
+                if(l[i].score<r[j].score){
+                    arr[begin++]=l[i++];
+
+                }
+                else{
+
+                    arr[begin++]=r[j++];
+
+                }
+
+
+
+
+
+
+            }   
+            while(i<n1){
+                arr[begin++]=l[i++];
+            }
+            while(i<n2){
+                arr[begin++]=r[j++];
+            }
+
+
+
+
+
+
+
+
+        }
+
+
+        void mergesort(student *arr, int start,int end){
+            if(start<end){
+                int mid=start+(end-start)/2;
+                mergesort(arr,start,mid);
+                mergesort(arr,mid+1,end);
+                merge(arr,start,end);
+
+
+
+
+
+
+
+
+
+
+
+            }
+
+
+
         }
 
 
         void sort(){
-             quicksort(students,0,count-1);
+             mergesort(students,0,count-1);
         }
        
 
@@ -172,7 +252,7 @@ manageprogram *mp=new manageprogram();
 
 mp->add("shinhyunji","23-70013199",60);
 mp->add("shinusnho","23-70013199",90);
-mp->add("shin","23-70013199",75);
+mp->add("shin","23-70013199",55);
 mp->sort();
 mp->savetoFIle();
 
