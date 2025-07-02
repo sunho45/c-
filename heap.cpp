@@ -95,6 +95,102 @@ class heap{       /* maxheap*/
         
         }
         }
+        void heapdown(){
+            node *current= root;
+            queue <node*> q;
+            while(current->left!=nullptr&&current->right!=nullptr){
+                if(*(current->left->num)<*(current->right->num)){
+
+
+
+                    swap(current->num,current->left->num);
+                    current=current->left;
+                    heapup(current);
+
+                }
+                else{
+                    swap(current->num,current->right->num);
+                    current=current->right;
+                    heapup(current);
+                }
+
+
+
+
+            }
+
+
+        }
+
+
+        int pop(){
+
+
+            int num=*(root->num);
+            node * re=root;
+            node *    roots=getlastnode();
+            root->num=roots->num;
+            if(roots->parent->left==roots){
+                roots->parent->left=nullptr;
+            }
+            else if(roots->parent->right==roots){
+                roots->parent->right=nullptr;
+            }
+
+
+
+
+            delete roots;
+            heapdown();
+
+
+                
+
+
+
+
+
+
+
+            return num;
+
+        }
+        node* getlastnode(){
+            queue <node*> q;
+            q.push(root);
+            node *current=root;
+
+
+
+            while(!q.empty()){
+                if(q.front()->left!=nullptr){
+                    q.push(q.front()->left);
+                    current=q.front()->left;
+
+
+                }
+                else if(q.front()->right!=nullptr){
+                    q.push(q.front()->right);
+                    
+                    current=q.front()->right;
+                }
+                q.pop();
+
+            } 
+
+
+
+            return current;
+
+            
+
+        }
+
+
+
+
+
+
         void heapup(node *childrennode){
             node* current =childrennode;
             
@@ -187,7 +283,11 @@ hp->pushmin(&a);
 hp->pushmin(&b);
 hp->pushmin(&c);
 hp->pushmin(&d);
-hp->levelorder();
+
+cout<<hp->pop()<<endl;
+cout<<hp->pop()<<endl;
+
+
 
 
 
