@@ -95,26 +95,33 @@ class heap{       /* maxheap*/
         
         }
         }
-        void heapdown() {
+void heapdown() {
     node* current = root;
+    if (!current || !current->num) return;
 
     while (true) {
         node* smallest = current;
 
-        if (current->left && *(current->left->num) < *(smallest->num)) {
+        // 왼쪽 자식과 비교
+        if (current->left && current->left->num &&
+            smallest->num && *(current->left->num) < *(smallest->num)) {
             smallest = current->left;
         }
 
-        if (current->right && *(current->right->num) < *(smallest->num)) {
+        // 오른쪽 자식과 비교
+        if (current->right && current->right->num &&
+            smallest->num && *(current->right->num) < *(smallest->num)) {
             smallest = current->right;
         }
 
-        if (smallest == current) break;  // 자식 중 더 작은 게 없으면 정지
+        // 더 이상 교환할 필요 없으면 break
+        if (smallest == current) break;
 
         swap(current->num, smallest->num);
         current = smallest;
     }
 }
+
 
 
 
@@ -147,6 +154,11 @@ class heap{       /* maxheap*/
             node * re=root;
             node *    roots=getlastnode();
             root->num=roots->num;
+
+
+
+
+            if(root->parent!=nullptr){
             if(roots->parent->left==roots){
                 roots->parent->left=nullptr;
             }
@@ -155,7 +167,7 @@ class heap{       /* maxheap*/
             }
 
 
-
+        }
 
             delete roots;
             heapdown();
@@ -203,7 +215,7 @@ class heap{       /* maxheap*/
 
 
             delete roots;
-            heapdown();
+            heapdownmax();
 
 
                 
@@ -278,6 +290,7 @@ class heap{       /* maxheap*/
         }
 
          void heapupmin(node *childrennode){
+             if (!childrennode) return;
             node* current =childrennode;
             
             
@@ -334,7 +347,43 @@ class heap{       /* maxheap*/
         }
 
 
+void heapsort(int * arr){
+int i=0;
+while(i<5){
 
+pushmin(arr+i++);
+
+
+
+
+}
+
+
+i=0;
+
+
+
+while(i<5){
+
+*(arr+i++)=pop();
+
+
+
+
+}
+i=0;
+while(i<5){
+
+cout<<*(arr+i)<<endl;
+
+
+i++;
+
+}
+
+
+
+}
 
     
 
@@ -348,25 +397,17 @@ class heap{       /* maxheap*/
 int main(){
 
 heap *hp=new heap();
-int a=10;
-int b=40;
-int c=20;
-int d=50;
-hp->pushmin(&a);
-hp->pushmin(&b);
-hp->pushmin(&c);
-hp->pushmin(&d);
+int arr[5]{5,7,15,9,12};
 
-cout<<hp->pop()<<endl;
-cout<<hp->pop()<<endl;
-cout<<hp->pop()<<endl;
+
+
+hp->heapsort(arr);
 
 
 
 
 
-
-
+delete hp;
 
 
 
